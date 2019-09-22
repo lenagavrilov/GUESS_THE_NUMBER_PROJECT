@@ -1,29 +1,34 @@
 from random import *
+
 def random_number():
+    global comp_number
     comp_number = randint(1,10)
-    print(comp_number)
+    #print(comp_number)
     return comp_number
 
-def user_input(comp_number):
+def user_input():
     user_guess = 0
+    global count
     count = 1
+    random_number()
     while user_guess!= comp_number:
         print("Guess #", count)
         user_guess = input("Type your number: ")
         if user_guess.isdigit():
-            guesses(user_guess,comp_number,count)
-            count +=1
+            guesses(user_guess)
+            count+=1
         else:
-            print("This is not a number! Start over!")
-            user_input(comp_number)
+            print("This is not a number! Try again!")
+            count+=1
+            pass
 
-def guesses(user_guess,comp_number,count):
+def guesses(user_guess):
     if int(user_guess) > comp_number:
         number_is_bigger()
     elif int(user_guess)<comp_number:
         number_is_smaller()
     else:
-        number_is_equal(count)
+        number_is_equal()
 
 
 def number_is_bigger():
@@ -32,22 +37,14 @@ def number_is_bigger():
 def number_is_smaller():
     print("Your number is smaller!")
 
-def number_is_equal(count):
+def number_is_equal():
     print("You won from the", count, 'try!')
     exit(0)
 
-user_input(random_number())
+if __name__ == '__main__':
+    user_input()
+else:
+    print("imported")
 
-"""if user_guess>comp_number:
-            print ("Your number is bigger!")
-            count +=1
-            continue
-        elif user_guess<comp_number:
-            print("Your number is smaller!")
-            count +=1
-            continue
-        else:
-            print("You won from the", count, 'try!')
-            exit(0)"""
 
 
